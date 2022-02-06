@@ -6,25 +6,28 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 05:34:08 by apila-va          #+#    #+#             */
-/*   Updated: 2022/02/05 12:28:26 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/02/06 21:33:27 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#include "mini_talk_bonus.h"
 
-void	send_msg(char **argv, int i, int j, int bits)
+void	send_msg(char **argv, int i, int j)
 {
+	int					bits;
+
+	bits = 0;
 	while (1)
 	{
 		bits = 8;
 		while (bits != 0)
 		{
-			bits--;
+			 bits--;
 			if ((argv[2][j] >> bits & 1) == 1)
 				kill(i, SIGUSR1);
 			else
 				kill(i, SIGUSR2);
-			usleep(100);
+			usleep(400);
 		}
 		if (argv[2][j] == '\0')
 			break ;
@@ -36,39 +39,28 @@ static void	print_ack(int sig, siginfo_t *info, void *nothing)
 {
 	nothing = NULL;
 	info = NULL;
-	usleep(100);
 	if (sig == SIGUSR1)
 		ft_putstr_fd("recieved", 1);
-}
-
-void	wait_for_ack(void)
-{
-	struct sigaction	act;
-
-	sigemptyset(&act.sa_mask);
-	act.sa_flags = SA_SIGINFO;
-	act.sa_sigaction = print_ack;
-	if (sigaction(SIGUSR1, &act, NULL) < 0)
-	{
-		error();
-		exit (0);
-	}		
 }
 
 int	main(int argc, char **argv)
 {	
 	int					i;
-	int					bits;
 	int					j;
+	struct sigaction	act;
 
 	j = 0;
-	i = ft_atoi(argv[1]);
-	bits = 0;
-	if (argc != 3 || i <= 0)
+	if (argc != 3)
 		error();
 	else
 	{
-		wait_for_ack();
-		send_msg(argv, i, j, bits);
+		i = ft_atoi(argv[1]);
+		if (i <= 0)
+			error();
+		act.sa_flags = SA_SIGINFO;
+		sigemptyset(&act.sa_mask);
+		act.sa_sigaction = print_ack;
+		sigaction(SIGUSR1, &act, NULL);
+		send_msg(argv, i, j);
 	}
 }

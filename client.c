@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 05:33:57 by apila-va          #+#    #+#             */
-/*   Updated: 2022/02/05 05:33:59 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/02/06 21:05:50 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	i = ft_atoi(argv[1]);
 	if (argc != 3 || i <= 0)
 		error();
-	while (argv[2][j])
+	while (1)
 	{
 		bits = 8;
 		while (bits != 0)
@@ -32,8 +32,10 @@ int	main(int argc, char **argv)
 				kill(i, SIGUSR1);
 			else
 				kill(i, SIGUSR2);
-			usleep(100);
+			usleep(400);
 		}
+		if (argv[2][j] == '\0')
+			break ;
 		j++;
 	}
 }

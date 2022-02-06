@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 05:33:11 by apila-va          #+#    #+#             */
-/*   Updated: 2022/02/05 12:35:16 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/02/06 20:28:30 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,9 @@ int	main(void)
 	pid = getpid();
 	ft_putstr_fd("pid = ", 1);
 	ft_putnbr_fd(pid, 1);
+	sigaction(SIGUSR1, &act, NULL);
+	sigaction(SIGUSR2, &act, NULL);
 	while (1)
-	{
-		if (sigaction(SIGUSR1, &act, NULL) < 0 || \
-		    sigaction(SIGUSR2, &act, NULL) < 0)
-		{
-			ft_putstr_fd("error", 1);
-			error();
-			return (0);
-		}
-	}
+		;
 	return (0);
 }

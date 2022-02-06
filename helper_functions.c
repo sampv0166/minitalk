@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 05:33:45 by apila-va          #+#    #+#             */
-/*   Updated: 2022/02/05 12:36:54 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/02/05 12:48:10 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_putchar_fd(char c, int fd)
 
 void	error(void)
 {
+	ft_putstr_fd("error", 1);
 	exit(0);
 }
 

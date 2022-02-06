@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 05:33:01 by apila-va          #+#    #+#             */
-/*   Updated: 2022/02/05 05:33:03 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/02/06 20:51:34 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	print_client_msg(int sig, siginfo_t *info, void *nothing)
 
 	nothing = NULL;
 	info = NULL;
-	i = 0;
 	if (sig == SIGUSR2)
 		sig = 0;
 	else if (sig == SIGUSR1)
@@ -32,6 +31,8 @@ static void	print_client_msg(int sig, siginfo_t *info, void *nothing)
 	c = c + i;
 	if (size == 0)
 	{
+		if (c == 0)
+			ft_putstr_fd("\n", 1);
 		ft_putchar_fd(c, 1);
 		size = 8;
 		c = 0;
@@ -49,14 +50,9 @@ int	main(void)
 	pid = getpid();
 	ft_putstr_fd("pid = ", 1);
 	ft_putnbr_fd(pid, 1);
+	sigaction(SIGUSR1, &act, NULL);
+	sigaction(SIGUSR2, &act, NULL);
 	while (1)
-	{
-		if (sigaction(SIGUSR1, &act, NULL) < 0 || \
-		    sigaction(SIGUSR2, &act, NULL) < 0)
-		{
-			error();
-			return (0);
-		}
-	}
+		;
 	return (0);
 }

@@ -35,9 +35,10 @@ client_bonus : $(BNS_OBJ)
 		$(CC) $(CFLAGS) client_bonus.o helper_functions_bonus.o -o $(CLIENT_BONUS)
 
 clean :
-		rm -rf *.o server client server_bonus client_bonus
+		rm -rf *.o 
 		
 fclean :clean
+		rm -rf server client server_bonus client_bonus
 
-re : fclean all
+re : fclean all bonus
 		
