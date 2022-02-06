@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 05:34:08 by apila-va          #+#    #+#             */
-/*   Updated: 2022/02/06 21:33:27 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/02/07 00:55:54 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	send_msg(char **argv, int i, int j)
 		while (bits != 0)
 		{
 			 bits--;
-			if ((argv[2][j] >> bits & 1) == 1)
+			if (((unsigned char) argv[2][j] >> bits & 1) == 1)
 				kill(i, SIGUSR1);
 			else
 				kill(i, SIGUSR2);
