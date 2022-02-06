@@ -6,11 +6,18 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 05:33:57 by apila-va          #+#    #+#             */
-/*   Updated: 2022/02/07 00:56:47 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/02/07 01:24:55 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_talk.h"
+
+void	init(int *j, int argc)
+{
+	*j = 0;
+	if (argc != 3)
+		error();
+}
 
 int	main(int argc, char **argv)
 {	
@@ -18,10 +25,8 @@ int	main(int argc, char **argv)
 	int	bits;
 	int	j;
 
-	j = 0;
+	init(&j, argc);
 	i = ft_atoi(argv[1]);
-	if (argc != 3 || i <= 0)
-		error();
 	while (1)
 	{
 		bits = 8;
